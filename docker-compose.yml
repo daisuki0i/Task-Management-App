@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: daisuki0i
+      POSTGRES_PASSWORD: AdZav4wSGa20bzz0w3
+      POSTGRES_DB: taskmanagement-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
