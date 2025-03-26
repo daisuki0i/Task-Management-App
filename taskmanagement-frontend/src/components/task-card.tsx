@@ -31,12 +31,15 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { updateTask, deleteTask } from "@/api/tasksApi";
 import { toast } from "sonner";
+import { useState } from "react";
 
 interface TaskFormProps extends Task {
   onTaskSaved: () => void;
 }
 
 export default function TaskCard(props: TaskFormProps) {
+  const [open, setOpen] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       title: props.title,
@@ -58,6 +61,7 @@ export default function TaskCard(props: TaskFormProps) {
           status: values.status,
         });
         toast.success("Task updated successfully");
+        setOpen(false);
         props.onTaskSaved();
       } catch (error) {
         toast.error("Failed to update task. Please try again.");
@@ -71,6 +75,7 @@ export default function TaskCard(props: TaskFormProps) {
     try {
       await deleteTask(props.id);
       toast.success("Task deleted successfully");
+      setOpen(false);
       props.onTaskSaved();
     } catch (error) {
       toast.error("Failed to delete task. Please try again.");
@@ -79,7 +84,7 @@ export default function TaskCard(props: TaskFormProps) {
 
   return (
     <>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Card className="cursor-pointer w-full">
             <CardHeader>
