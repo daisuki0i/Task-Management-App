@@ -21,11 +21,15 @@ export const getTasks = async () => {
 
 export const updateTask = async (id: string, data: TaskUpdate) => {
   try {
-    const response: AxiosResponse<Task> = await axiosInstance.patch(`/tasks/${id}`, data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response: AxiosResponse<Task> = await axiosInstance.patch(
+      `/tasks/${id}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     const responseData = response.data;
 
     if (responseData) {
@@ -38,11 +42,15 @@ export const updateTask = async (id: string, data: TaskUpdate) => {
 
 export const createTask = async (data: TaskUpdate) => {
   try {
-    const response: AxiosResponse<Task> = await axiosInstance.post("/tasks", data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response: AxiosResponse<Task> = await axiosInstance.post(
+      "/tasks",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     const responseData = response.data;
 
     if (responseData) {

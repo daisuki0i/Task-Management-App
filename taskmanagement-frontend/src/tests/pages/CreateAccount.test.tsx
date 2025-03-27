@@ -66,7 +66,7 @@ describe("CreateAccount Component", () => {
 
     const emailInput = screen.getByPlaceholderText("Your email address");
 
-    // Focus and blur without entering text - wrapped in act
+    // Focus and blur without entering text 
     await act(async () => {
       fireEvent.focus(emailInput);
       fireEvent.blur(emailInput);
@@ -81,13 +81,13 @@ describe("CreateAccount Component", () => {
 
     const emailInput = screen.getByPlaceholderText("Your email address");
 
-    // Enter invalid email - wrapped in act
+    // Enter invalid email
     await act(async () => {
       fireEvent.change(emailInput, { target: { value: "invalid-email" } });
       fireEvent.blur(emailInput);
     });
 
-    // Check for validation error - using a more reliable approach
+    // Check for validation error
     const errorElements = document.querySelectorAll(".text-red-500.text-xs");
     expect(errorElements.length).toBeGreaterThan(0);
     expect(emailInput).toBeInTheDocument();
@@ -98,7 +98,7 @@ describe("CreateAccount Component", () => {
 
     const passwordInput = screen.getByPlaceholderText("Create a password");
 
-    // Focus and blur without entering text - wrapped in act
+    // Focus and blur without entering text 
     await act(async () => {
       fireEvent.focus(passwordInput);
       fireEvent.blur(passwordInput);
@@ -115,7 +115,7 @@ describe("CreateAccount Component", () => {
       "Confirm your password"
     );
 
-    // Focus and blur without entering text - wrapped in act
+    // Focus and blur without entering text 
     await act(async () => {
       fireEvent.focus(confirmPasswordInput);
       fireEvent.blur(confirmPasswordInput);
@@ -130,7 +130,7 @@ describe("CreateAccount Component", () => {
   it("shows error when passwords don't match", async () => {
     render(<CreateAccount />);
 
-    // Enter different passwords - wrapped in act
+    // Enter different passwords 
     await act(async () => {
       fireEvent.change(screen.getByPlaceholderText("Create a password"), {
         target: { value: "password123" },
@@ -158,7 +158,7 @@ describe("CreateAccount Component", () => {
 
     render(<CreateAccount />);
 
-    // Fill the form with valid data and submit - wrapped in act
+    // Fill the form with valid data and submit
     await act(async () => {
       fireEvent.change(screen.getByPlaceholderText("Your email address"), {
         target: { value: "test@example.com" },
@@ -196,7 +196,7 @@ describe("CreateAccount Component", () => {
 
     render(<CreateAccount />);
 
-    // Fill the form with valid data and submit - wrapped in act
+    // Fill the form with valid data and submit 
     await act(async () => {
       fireEvent.change(screen.getByPlaceholderText("Your email address"), {
         target: { value: "test@example.com" },
@@ -233,7 +233,7 @@ describe("CreateAccount Component", () => {
       "Confirm your password"
     );
 
-    // Type into fields - wrapped in act
+    // Type into fields 
     await act(async () => {
       // Type into email field
       fireEvent.change(emailInput, { target: { value: "test@example.com" } });
@@ -264,7 +264,7 @@ describe("CreateAccount Component", () => {
 
     render(<CreateAccount />);
 
-    // Fill form with test data and submit - wrapped in act
+    // Fill form with test data and submit
     await act(async () => {
       fireEvent.change(screen.getByPlaceholderText("Your email address"), {
         target: { value: "user@example.com" },
@@ -295,7 +295,7 @@ describe("CreateAccount Component", () => {
   it("doesn't submit the form when validation fails", async () => {
     render(<CreateAccount />);
 
-    // Submit without filling the form - wrapped in act
+    // Submit without filling the form 
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: /create account/i }));
     });
