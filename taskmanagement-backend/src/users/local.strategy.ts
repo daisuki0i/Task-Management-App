@@ -1,6 +1,6 @@
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Injectable()
@@ -16,13 +16,13 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       const loginResult = await this.usersService.login({ email, password });
 
       if (!loginResult.access_token) {
-        throw new UnauthorizedException('Invalid credentials');
+        throw new BadRequestException('Invalid credentials');
       }
 
       return { email, access_token: loginResult.access_token };
     } catch (error) {
       console.log(error);
-      throw new UnauthorizedException('Authentication failed');
+      throw new InternalServerErrorException('Authentication failed');
     }
   }
 }
