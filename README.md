@@ -199,6 +199,5 @@ TaskManagementApp/
     │   ├── types/            # TypeScript type definitions
     │   ├── users/            # Users and authentication module
     │   └── main.ts           # Application entry point
-    ├── test/                 # Test directory
     └── ...
 ```
