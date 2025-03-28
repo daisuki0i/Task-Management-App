@@ -5,6 +5,7 @@ A full-stack application for managing tasks with a React frontend and NestJS bac
 ## Project Overview
 
 This project consists of two main components:
+
 - **Frontend**: React application with TypeScript, Vite, and modern UI libraries
 - **Backend**: NestJS application with Sequelize ORM and PostgreSQL
 
@@ -71,12 +72,14 @@ The frontend application will be available at http://localhost:5173
 ### Building for Production
 
 Backend:
+
 ```bash
 cd taskmanagement-backend
 npm run build
 ```
 
 Frontend:
+
 ```bash
 cd taskmanagement-frontend
 npm run build
@@ -98,9 +101,11 @@ JWT_SECRET=your_jwt_secret
 ```
 
 Build and run frontend, backend and database:
+
 ```bash
 docker compose up -d
 ```
+
 You can access the frontend application via port 80.
 
 ## Architecture and Design Decisions
@@ -114,7 +119,7 @@ You can access the frontend application via port 80.
   - shadcn/ui for composable, accessible UI components
   - Tailwind CSS for utility-first styling
   - Radix UI for unstyled, accessible components (used by shadcn/ui)
-- **Form Handling**: 
+- **Form Handling**:
   - Formik and React Hook Form for form state management
   - Yup for schema validation and form validation rules
 - **State Management**: React's built-in Context API for global state
@@ -130,6 +135,7 @@ This project uses [shadcn/ui](https://ui.shadcn.com/) for its UI components. Unl
 - These components are fully customizable and not treated as third-party dependencies
 
 **Testing Philosophy:**
+
 - We don't write unit tests for the base shadcn/ui components in `src/components/ui` since they are imported components (not written by us)
 - We write comprehensive unit tests for all custom components that we build ourselves
 - This includes any component that composes or extends the shadcn/ui primitives
@@ -143,7 +149,7 @@ This project uses [shadcn/ui](https://ui.shadcn.com/) for its UI components. Unl
 - **Database**: PostgreSQL with Sequelize ORM
 - **API Design**: RESTful API following best practices
 - **Validation**: Class-validator for request validation
-- **Security**: 
+- **Security**:
   - JWT for secure authentication
   - bcrypt for password hashing
   - Proper CORS configuration
@@ -159,6 +165,7 @@ This project uses [shadcn/ui](https://ui.shadcn.com/) for its UI components. Unl
 ## Testing
 
 ### Frontend Tests
+
 Note: We don't write unit tests for the base shadcn/ui components in `src/components/ui` since they are imported components (not written by us)
 
 ```bash
