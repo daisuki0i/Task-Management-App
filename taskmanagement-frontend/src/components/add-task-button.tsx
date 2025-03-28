@@ -32,7 +32,7 @@ export default function AddTaskButton({ status, onTaskSaved }: TaskFormProps) {
     },
     validationSchema: Yup.object({
       title: Yup.string().required("Task name is required"),
-      description: Yup.string().required("Description is required"),
+      description: Yup.string().optional().nullable(),
       status: Yup.string().required("Status is required"),
     }),
     onSubmit: async (values) => {

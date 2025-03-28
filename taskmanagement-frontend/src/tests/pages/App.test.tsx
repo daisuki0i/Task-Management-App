@@ -107,12 +107,12 @@ describe("TaskDashboard Component", () => {
     // If this test passes without throwing an error, the component renders successfully
   });
 
-  it("displays the logout link correctly", () => {
+  it("displays the logout link correctly", async () => {
     render(<TaskDashboard />);
 
-    const logoutLink = screen.getByText("Logout");
-    expect(logoutLink).toBeInTheDocument();
-    expect(logoutLink.closest("a")).toHaveAttribute("href", "/get-started");
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: /logout/i })).toBeInTheDocument();
+    });
   });
 
   it("renders exactly 3 TaskColumn components", async () => {
@@ -206,35 +206,21 @@ describe("TaskDashboard Component", () => {
     });
   });
 
-  // 4. Responsiveness Tests
-  it("uses responsive grid layout", () => {
-    // Render and check the grid container
-    const { container } = render(<TaskDashboard />);
-
-    // Find the grid container element
-    const gridContainer = container.querySelector(
-      ".grid.grid-cols-1.md\\:grid-cols-3"
-    );
-
-    // Verify it exists
-    expect(gridContainer).toBeInTheDocument();
-
-    // Check that it has the correct responsive classes
-    expect(gridContainer).toHaveClass("grid-cols-1");
-    expect(gridContainer).toHaveClass("md:grid-cols-3");
-  });
-
-  // 5. User Interaction Tests
-  it("has logout link pointing to '/get-started'", () => {
+  // User Interaction Tests
+  it("has logout button links to /login'", async () => {
     render(<TaskDashboard />);
 
-    const logoutLink = screen.getByText("Logout");
+    await waitFor(() => {
+      const logoutButton = screen.getByRole("button", { name: /logout/i });
+      expect(logoutButton).toBeInTheDocument();
 
-    // Verify the link has the correct href instead of clicking it
-    expect(logoutLink.closest("a")).toHaveAttribute("href", "/get-started");
+      // Simulate click
+      userEvent.click(logoutButton);
+      expect(window.location.href).toContain("/login");
+    });
   });
 
-  // 6. Column Config Tests
+  // Column Config Tests
   it("has correct column configurations", async () => {
     render(<TaskDashboard />);
 

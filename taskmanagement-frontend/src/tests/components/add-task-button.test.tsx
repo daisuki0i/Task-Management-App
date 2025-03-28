@@ -103,7 +103,6 @@ describe("AddTaskButton Component", () => {
 
     // Check for validation errors
     expect(screen.getByText("Task name is required")).toBeInTheDocument();
-    expect(screen.getByText("Description is required")).toBeInTheDocument();
   });
 
   it("removes validation errors when fields are properly filled", async () => {

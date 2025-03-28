@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "sonner";
 
-const API_URL = import.meta.env.VITE_END_POINT;
+const API_URL = "http://localhost:3000/";
 const axiosInstance = axios.create({ baseURL: API_URL });
 
 // Add a response interceptor
@@ -24,6 +24,8 @@ axiosInstance.interceptors.response.use(
         setTimeout(() => {
           window.location.href = "/login";
         }, 1500);
+      } else {
+        window.location.href = "/get-started";
       }
     }
 

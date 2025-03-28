@@ -14,6 +14,7 @@ interface ColumnConfig {
 
 export default function TaskDashboard() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchTasks = async () => {
     try {
@@ -22,6 +23,8 @@ export default function TaskDashboard() {
       if (data) {
         setTasks(data);
       }
+
+      setLoading(false);
     } catch (error) {
       toast.error("An error occurred while fetching tasks");
     }
@@ -58,28 +61,36 @@ export default function TaskDashboard() {
 
   return (
     <>
-      <div className="flex items-center justify-end p-3">
-        <a
-          href="/get-started"
-          className="flex items-center hover:underline cursor-pointer"
-        >
-          <LogoutIcon className="mr-1" />
-          Logout
-        </a>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 p-8 gap-4 w-full">
-        {columnConfigs.map((config) => (
-          <TaskColumn
-            key={config.status}
-            title={config.title}
-            status={config.status}
-            tasks={getTasksByStatus(config.status)}
-            bgColor={config.bgColor}
-            dotColor={config.dotColor}
-            onTaskSaved={fetchTasks}
-          />
-        ))}
-      </div>
+      {!loading && (
+        <>
+          <div className="flex items-center justify-end p-3">
+            <button
+              onClick={() => {
+                localStorage.removeItem("token");
+                window.location.href = "/login";
+              }}
+              className="flex items-center hover:underline cursor-pointer"
+              name="logout"
+            >
+              <LogoutIcon className="mr-1" />
+              Logout
+            </button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 p-8 gap-4 w-full">
+            {columnConfigs.map((config) => (
+              <TaskColumn
+                key={config.status}
+                title={config.title}
+                status={config.status}
+                tasks={getTasksByStatus(config.status)}
+                bgColor={config.bgColor}
+                dotColor={config.dotColor}
+                onTaskSaved={fetchTasks}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 }
